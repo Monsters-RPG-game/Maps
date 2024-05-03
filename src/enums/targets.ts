@@ -1,5 +1,7 @@
 export enum EMapsTargets {
-  CreateMap = 'createMap',
+  Create = 'createMap',
+  Get = 'getMap',
+  Update = 'updateMap',
 }
 
 export enum EMessageTargets {
