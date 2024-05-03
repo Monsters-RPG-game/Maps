@@ -7,7 +7,7 @@ export default abstract class RoosterFactory<T extends Document, U extends Model
 {
   private readonly _model: U;
 
-  constructor(model: U) {
+  protected constructor(model: U) {
     this._model = model;
   }
 

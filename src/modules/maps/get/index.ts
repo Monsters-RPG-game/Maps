@@ -13,7 +13,7 @@ export default class Controller extends ControllerFactory<EModules.Maps> {
   async get(data: IGetMapDto): Promise<IMapEntity | null> {
     const payload = new GetMapDto(data);
 
-    if (payload.name) return this.rooster.getByName(data.name as string);
-    return this.rooster.get(data.id);
+    if (payload.name) return this.rooster.getByName(payload.name);
+    return this.rooster.get(payload.id);
   }
 }
