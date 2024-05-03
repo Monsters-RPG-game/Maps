@@ -1,7 +1,7 @@
 import type { EModules } from '../../enums';
-import type { IMapEntity } from '../../modules/map/entity';
-import type MapsController from '../../modules/maps/controller/';
 import type { ICreateMapDto } from '../../modules/maps/create/types';
+import type { IMapEntity } from '../../modules/maps/entity';
+import type MapsController from '../../modules/maps/get';
 import type MapsRooster from '../../modules/maps/rooster';
 
 export interface IModulesHandlers {

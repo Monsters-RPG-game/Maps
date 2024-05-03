@@ -4,17 +4,13 @@ import type mongoose from 'mongoose';
 
 export default abstract class TemplateFactory<T extends EFakeData> {
   private readonly _target: IFakeModel[T];
-  private _state: IFakeState[T] = {};
-  private _states: IFakeState[T][] = [];
 
   protected constructor(target: IFakeModel[T]) {
     this._target = target;
     this.fillState();
   }
 
-  protected get target(): IFakeModel[T] {
-    return this._target;
-  }
+  private _state: IFakeState[T] = {};
 
   protected get state(): IFakeState[T] {
     return this._state;
@@ -24,12 +20,18 @@ export default abstract class TemplateFactory<T extends EFakeData> {
     this._state = value;
   }
 
+  private _states: IFakeState[T][] = [];
+
   protected get states(): IFakeState[T][] {
     return this._states;
   }
 
   protected set states(value: IFakeState[T][]) {
     this._states = value;
+  }
+
+  protected get target(): IFakeModel[T] {
+    return this._target;
   }
 
   async create(): Promise<string> {
