@@ -80,5 +80,32 @@ describe('Character location', () => {
 
       expect(err).toBeUndefined();
     });
+
+    it('Change', async () => {
+      await db.characterLocation
+        .character(fakeCharacterLocation.character)
+        .x(fakeCharacterLocation.x)
+        .y(fakeCharacterLocation.y)
+        .map(fakeCharacterLocation.map)
+        .create();
+
+      let err: Error | undefined = undefined;
+      const rooster = new Rooster();
+
+      try {
+        await rooster.updateByCharacter(fakeCharacterLocation.character, {
+          x: 20,
+          y: 0,
+          map: new mongoose.Types.ObjectId().toString(),
+        });
+      } catch (error) {
+        err = error as Error;
+      }
+
+      const newData = await rooster.getByCharacter(fakeCharacterLocation.character);
+
+      expect(err).toBeUndefined();
+      expect(newData!.x).toEqual(20);
+    });
   });
 });

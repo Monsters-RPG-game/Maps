@@ -7,6 +7,7 @@ export enum EMapsTargets {
 export enum ECharacterLocationTargets {
   Create = 'createCharacterLocation',
   Get = 'getCharacterLocation',
+  Change = 'changeCharacterLocation',
 }
 
 export enum EMessageTargets {

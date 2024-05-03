@@ -16,4 +16,8 @@ export default class Rooster extends RoosterFactory<
   async getByCharacter(character: string): Promise<ICharacterLocationEntity | null> {
     return this.model.findOne({ character }).lean();
   }
+
+  async updateByCharacter(character: string, data: Partial<ICharacterLocationEntity>): Promise<void> {
+    await this.model.findOneAndUpdate({ character }, data);
+  }
 }

@@ -55,6 +55,8 @@ export default class Router {
         return this.characterLocation.create(payload.payload, payload.user);
       case enums.ECharacterLocationTargets.Get:
         return this.characterLocation.get(payload.payload, payload.user);
+      case enums.ECharacterLocationTargets.Change:
+        return this.characterLocation.change(payload.payload, payload.user);
       default:
         throw new errors.IncorrectTargetError();
     }
