@@ -4,7 +4,7 @@ import type { IAbstractBody } from '../types/data';
 import { IMapEntity, IMapFields } from '../../../../src/modules/maps/entity';
 import Maps from '../../../../src/modules/maps/model';
 
-export default class FakeLog extends TemplateFactory<EFakeData.Maps> implements IAbstractBody<IMapEntity> {
+export default class FakeMap extends TemplateFactory<EFakeData.Maps> implements IAbstractBody<IMapEntity> {
   constructor() {
     super(Maps);
   }

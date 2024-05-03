@@ -4,6 +4,12 @@ export enum EMapsTargets {
   Update = 'updateMap',
 }
 
+export enum ECharacterLocationTargets {
+  Create = 'createCharacterLocation',
+  Get = 'getCharacterLocation',
+}
+
 export enum EMessageTargets {
   Map = 'map',
+  CharacterLocation = 'characterLocation',
 }

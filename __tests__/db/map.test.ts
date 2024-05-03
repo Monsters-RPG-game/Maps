@@ -54,7 +54,7 @@ describe('Map', () => {
       expect(fields).toEqual(fakeMap.fields);
     });
 
-    it('add', async () => {
+    it('Add', async () => {
       let err: Error | undefined = undefined;
       const rooster = new Rooster();
 
