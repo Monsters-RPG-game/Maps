@@ -33,6 +33,8 @@ export default class Router {
         return this.maps.create(payload.payload, payload.user);
       case enums.EMapsTargets.Get:
         return this.maps.get(payload.payload, payload.user);
+      case enums.EMapsTargets.Update:
+        return this.maps.update(payload.payload, payload.user);
       default:
         throw new errors.IncorrectTargetError();
     }

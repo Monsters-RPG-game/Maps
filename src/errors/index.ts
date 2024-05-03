@@ -128,3 +128,13 @@ export class IncorrectAttackTarget extends FullError {
     this.status = 400;
   }
 }
+
+export class NoDataProvided extends FullError {
+  constructor() {
+    super('NoDataProvided');
+    this.message = 'No data provided';
+    this.name = 'NoDataProvided';
+    this.code = '026';
+    this.status = 400;
+  }
+}
