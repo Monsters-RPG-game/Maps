@@ -3,9 +3,9 @@ import type { ICreateCharacterLocationDto } from './types';
 
 export default class CreateCharacterLocationDto implements ICreateCharacterLocationDto {
   character: string;
-  x: number;
-  y: number;
-  map: string;
+  x?: number;
+  y?: number;
+  map?: string;
 
   constructor(data: ICreateCharacterLocationDto) {
     this.character = data.character;

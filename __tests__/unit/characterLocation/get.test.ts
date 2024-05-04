@@ -3,7 +3,7 @@ import * as errors from '../../../src/errors';
 import * as utils from '../../utils';
 import { ICharacterLocationEntity } from '../../../src/modules/locations/entity';
 import { IGetCharacterLocationDto } from '../../../src/modules/locations/get/types';
-import GetCharacterLocation from '../../../src/modules/locations/get/dto';
+import GetCharacterLocationDto from '../../../src/modules/locations/get/dto';
 
 describe('CharacterLocation - Get', () => {
   const fakeCharacterLocation = utils.fakeData.locations[0] as ICharacterLocationEntity;
@@ -20,7 +20,7 @@ describe('CharacterLocation - Get', () => {
           delete clone[k];
 
           try {
-            new GetCharacterLocation(clone);
+            new GetCharacterLocationDto(clone);
           } catch (err) {
             expect(err).toEqual(new errors.MissingArgError(k));
           }
@@ -34,7 +34,7 @@ describe('CharacterLocation - Get', () => {
         clone.character = 'asd';
 
         try {
-          new GetCharacterLocation(clone);
+          new GetCharacterLocationDto(clone);
         } catch (err) {
           expect(err).toEqual(new errors.IncorrectArgTypeError('character should be objectId'));
         }
@@ -45,7 +45,7 @@ describe('CharacterLocation - Get', () => {
         clone.id = 'asd';
 
         try {
-          new GetCharacterLocation(clone);
+          new GetCharacterLocationDto(clone);
         } catch (err) {
           expect(err).toEqual(new errors.IncorrectArgTypeError('id should be objectId'));
         }
@@ -58,7 +58,7 @@ describe('CharacterLocation - Get', () => {
       let err: Error | undefined = undefined;
 
       try {
-        new GetCharacterLocation(getLocation);
+        new GetCharacterLocationDto(getLocation);
       } catch (error) {
         err = error as Error;
       }

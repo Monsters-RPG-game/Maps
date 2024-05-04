@@ -12,6 +12,7 @@ export default class Controller extends ControllerFactory<EModules.CharacterLoca
   async create(data: ICreateCharacterLocationDto): Promise<string> {
     const payload = new CreateCharacterLocationDto(data);
 
+    if (!payload.map) return this.rooster.addDefault(payload.character);
     return this.rooster.add(payload);
   }
 }

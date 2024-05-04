@@ -2,7 +2,7 @@ import { NoDataProvided } from '../../../errors';
 import Validation from '../../../tools/validation';
 import type { IGetCharacterLocationDto } from './types';
 
-export default class GetCharacterLocation implements IGetCharacterLocationDto {
+export default class GetCharacterLocationDto implements IGetCharacterLocationDto {
   character?: string;
   id?: string;
 
