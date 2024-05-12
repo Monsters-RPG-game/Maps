@@ -1,4 +1,5 @@
 import type { IMapFields } from '../entity';
+import type { EFieldUpdateActions } from 'enums';
 
 export interface IUpdateMapFields extends IMapFields {
   position: number; // Field position in array
