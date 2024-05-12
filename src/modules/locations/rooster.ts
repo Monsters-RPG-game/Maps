@@ -21,9 +21,9 @@ export default class Rooster extends RoosterFactory<
     await this.model.findOneAndUpdate({ character }, data);
   }
 
-  async addDefault(character: string): Promise<string> {
+  async addDefault(character: string, map: string): Promise<string> {
     // #TODO Move this hardcodded data to config, which will be easy to manipulate. Because this project does not have any maps, this is used as placeholder
-    const newElement = new this.model({ character, map: 'main', x: 0, y: 0 });
+    const newElement = new this.model({ character, map, x: 0, y: 0 });
     const callback = await newElement.save();
     return callback._id.toString();
   }

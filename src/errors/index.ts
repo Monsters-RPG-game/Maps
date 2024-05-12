@@ -138,3 +138,23 @@ export class NoDataProvided extends FullError {
     this.status = 400;
   }
 }
+
+export class NoDefaultMap extends FullError {
+  constructor() {
+    super('NoDefaultMap');
+    this.message = 'Default map does not exist';
+    this.name = 'NoDefaultMap';
+    this.code = '027';
+    this.status = 400;
+  }
+}
+
+export class IncorrectLocationTarget extends FullError {
+  constructor() {
+    super('IncorrectLocationTarget');
+    this.message = 'Cannot move to this field';
+    this.name = 'IncorrectLocationTarget';
+    this.code = '028';
+    this.status = 400;
+  }
+}

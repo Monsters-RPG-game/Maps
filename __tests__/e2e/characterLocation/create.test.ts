@@ -5,6 +5,7 @@ import Controller from '../../../src/modules/locations/create';
 import { ICharacterLocationEntity } from '../../../src/modules/locations/entity';
 import { ICreateCharacterLocationDto } from '../../../src/modules/locations/create/types';
 import mongoose from 'mongoose';
+import { IFullError } from 'types';
 
 describe('Create character location', () => {
   const db = new utils.FakeFactory();
@@ -32,36 +33,64 @@ describe('Create character location', () => {
 
   describe('Should throw', () => {
     describe('No data passed', () => {
-      it('Missing character', () => {
+      it('Missing character', async () => {
+        let error: IFullError | undefined = undefined
         const clone = structuredClone(createLocation);
+
         clone.character = undefined!;
-        controller.create(clone).catch((err) => {
-          expect(err).toEqual(new errors.MissingArgError('character'));
-        });
+
+        try {
+          await controller.create(clone)
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.MissingArgError('character'));
       });
 
-      it('Missing x', () => {
+      it('Missing x', async () => {
+        let error: IFullError | undefined = undefined
         const clone = structuredClone(createLocation);
+
         clone.x = undefined!;
-        controller.create(clone).catch((err) => {
-          expect(err).toEqual(new errors.MissingArgError('x'));
-        });
+
+        try {
+          await controller.create(clone)
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.MissingArgError('x'));
       });
 
-      it('Missing y', () => {
+      it('Missing y', async () => {
+        let error: IFullError | undefined = undefined
         const clone = structuredClone(createLocation);
+
         clone.y = undefined!;
-        controller.create(clone).catch((err) => {
-          expect(err).toEqual(new errors.MissingArgError('y'));
-        });
+
+        try {
+          await controller.create(clone)
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.MissingArgError('y'));
       });
 
-      it('Missing map', () => {
+      it('Missing map', async () => {
+        let error: IFullError | undefined = undefined
         const clone = structuredClone(createLocation);
+
         clone.map = undefined!;
-        controller.create(clone).catch((err) => {
-          expect(err).toEqual(new errors.MissingArgError('map'));
-        });
+
+        try {
+          await controller.create(clone)
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.NoDefaultMap());
       });
     });
 
@@ -79,28 +108,52 @@ describe('Create character location', () => {
         await db.cleanUp();
       });
 
-      it('Character incorrect', () => {
-        controller.create({ ...createLocation, character: 'asd' }).catch((err) => {
-          expect(err).toEqual(new errors.IncorrectArgTypeError('character should be objectId'));
-        });
+      it('Character incorrect', async () => {
+        let error: IFullError | undefined = undefined
+
+        try {
+          await controller.create({ ...createLocation, character: 'asd' })
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.IncorrectArgTypeError("character should be objectId"))
       });
 
-      it('X incorrect', () => {
-        controller.create({ ...createLocation, x: 'a' as unknown as number }).catch((err) => {
-          expect(err).toEqual(new errors.IncorrectArgTypeError('x should be number'));
-        });
+      it('X incorrect', async () => {
+        let error: IFullError | undefined = undefined
+
+        try {
+          await controller.create({ ...createLocation, x: 'a' as unknown as number })
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.IncorrectArgTypeError('x should be number'));
       });
 
-      it('Y incorrect', () => {
-        controller.create({ ...createLocation, y: 'a' as unknown as number }).catch((err) => {
-          expect(err).toEqual(new errors.IncorrectArgTypeError('y should be number'));
-        });
+      it('Y incorrect', async () => {
+        let error: IFullError | undefined = undefined
+
+        try {
+          await controller.create({ ...createLocation, y: "a" as unknown as number })
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.IncorrectArgTypeError('y should be number'));
       });
 
-      it('Map incorrect', () => {
-        controller.create({ ...createLocation, map: 'as' }).catch((err) => {
-          expect(err).toEqual(new errors.IncorrectArgTypeError('map should be objectId'));
-        });
+      it('Map incorrect', async () => {
+        let error: IFullError | undefined = undefined
+
+        try {
+          await controller.create({ ...createLocation, map: "as" })
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.IncorrectArgTypeError('map should be objectId'));
       });
     });
   });

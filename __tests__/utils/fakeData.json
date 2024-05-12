@@ -1,111 +1,11 @@
 {
   "maps": [
     {
-      "_id": "6634b7d95b6121dc8766b473",
+      "_id": "6634b7d95b6121dc8766b471",
       "name": "testMap",
-      "height": 20,
-      "width": 20,
-      "fields": [
-        {
-          "x": 0,
-          "y": 0,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 0,
-          "y": 1,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 0,
-          "y": 2,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 1,
-          "y": 0,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 1,
-          "y": 1,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 1,
-          "y": 2,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 2,
-          "y": 0,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 2,
-          "y": 1,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        },
-        {
-          "x": 2,
-          "y": 2,
-          "type": "field",
-          "access": {
-            "top": true,
-            "left": true,
-            "right": true,
-            "bottom": true
-          }
-        }
-      ]
+      "height": 5,
+      "width": 5,
+      "fields": [1,1,2,2,1,1,1,1,1,1,2,1,2,1,1,1,1,2,2,2,2,1,1,2,1,2,1,2,1,2,1,2,1,2,1,1,1,1,1]
     }
   ],
   "locations": [
@@ -113,7 +13,7 @@
       "_id": "66353b9f6e7c8e878c22b013",
       "character": "66353b9f6e7c8e878c22b012",
       "x": 5,
-      "y": 0,
+      "y": 7,
       "map": "6634b7d95b6121dc8766b471"
     }
   ]

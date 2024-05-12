@@ -1,12 +1,13 @@
-import type { IMapEntity, IMapFields } from '../entity';
+import type { IMapFields } from '../entity';
 
 export interface IUpdateMapFields extends IMapFields {
-  toRemove?: boolean;
+  position: number; // Field position in array
+  action: EFieldUpdateActions;
+  newType?: number; // If field will be updated, specify field type
 }
 
 export interface IUpdateMapDto {
-  id: string;
-  map: Partial<Omit<IMapEntity, '_id'>> & {
-    fields?: IUpdateMapFields[];
-  };
+  _id: string;
+  fields?: IUpdateMapFields[];
+  remove?: boolean;
 }

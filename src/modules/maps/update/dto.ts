@@ -1,54 +1,35 @@
-import { EFieldType } from '../../../enums';
+import { EFieldUpdateActions } from '../../../enums';
 import { NoDataProvided } from '../../../errors';
 import Validation from '../../../tools/validation';
-import type { IUpdateMapFields } from './types';
-import type { IMapEntity } from '../entity';
+import type { IUpdateMapFields, IUpdateMapDto } from './types';
 
-export default class UpdateMapDto
-  implements
-    Partial<
-      IMapEntity & {
-        fields?: IUpdateMapFields[];
-      }
-    >
-{
+export default class UpdateMapDto implements IUpdateMapDto {
   _id: string;
-  name?: string;
+  remove?: boolean;
   fields?: IUpdateMapFields[];
-  height?: number;
-  width?: number;
 
-  constructor(data: Partial<Omit<IMapEntity, '_id'>>, _id: string) {
-    this._id = _id;
-    this.name = data.name;
-    this.height = data.height;
-    this.width = data.width;
+  constructor(data: IUpdateMapDto) {
+    this._id = data._id;
     this.fields = data.fields;
+    this.remove = data.remove;
 
     this.validate();
   }
 
   private validate(): void {
-    if (
-      (!this.name && this.height === undefined && this.width === undefined && !this.fields) ||
-      (this.fields?.length ?? 0) <= 0
-    ) {
+    if (!this._id && !this.remove && (!this.fields || this.fields.length === 0)) {
       throw new NoDataProvided();
     }
-    new Validation(this._id, '_id').isDefined().isString().isObjectId();
-    if (this.name) new Validation(this.name, 'name').isDefined().isString();
-    if (this.height) new Validation(this.height, 'height').isDefined().isNumber();
-    if (this.width) new Validation(this.width, 'width').isDefined().isNumber();
 
+    new Validation(this._id, '_id').isDefined().isString().isObjectId();
+    if (this.remove !== undefined) new Validation(this.remove, 'remove').isDefined().isBoolean();
     if (this.fields && this.fields.length > 0) {
-      new Validation(this.fields, 'fields').isDefined().isArray();
+      new Validation(this.fields, 'fields').isDefined().isNumberArray();
 
       this.fields.forEach((f) => {
-        if (!f.toRemove) {
-          new Validation(f.x, `field.${f.x}/${f.y}.x`).isDefined().isNumber();
-          new Validation(f.y, `field.${f.x}/${f.y}.y`).isDefined().isNumber();
-          new Validation(f.type, `field.${f.x}/${f.y}.type`).isDefined().isString().isPartOfEnum(EFieldType);
-          new Validation(f.access, `field.${f.x}/${f.y}.access`).isDefined();
+        new Validation(f.position, `fields.${f.position}`).isDefined().isNumber();
+        if (f.action === EFieldUpdateActions.Update) {
+          new Validation(f.newType, `fields.${f.position}`).isDefined().isNumber();
         }
       });
     }

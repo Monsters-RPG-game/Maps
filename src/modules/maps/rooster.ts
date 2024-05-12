@@ -12,4 +12,8 @@ export default class Rooster extends RoosterFactory<IMap, typeof Maps, EModules.
   async getByName(name: string): Promise<IMapEntity | null> {
     return this.model.findOne({ name }).lean();
   }
+
+  async remove(_id: string): Promise<void> {
+    await this.model.findOneAndDelete({ _id });
+  }
 }
