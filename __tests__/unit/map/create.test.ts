@@ -1,8 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import * as errors from '../../../src/errors';
-import { IMapFields } from '../../../src/modules/maps/entity';
 import { ICreateMapDto } from '../../../src/modules/maps/create/types';
-import { EFieldType } from '../../../src/enums';
 import CreateMapDto from '../../../src/modules/maps/create/dto';
 
 describe('Map', () => {
@@ -10,19 +8,7 @@ describe('Map', () => {
     name: 'testMap',
     height: 100,
     width: 100,
-    fields: [
-      {
-        x: 0,
-        y: 0,
-        type: EFieldType.Field,
-        access: {
-          top: true,
-          left: true,
-          right: true,
-          bottom: true,
-        },
-      },
-    ],
+    fields: [1, 2, 3],
   };
 
   describe('Should throw', () => {
@@ -77,7 +63,7 @@ describe('Map', () => {
 
       it('Fields incorrect', () => {
         const clone = structuredClone(createMap);
-        clone.fields = 'a' as unknown as IMapFields[];
+        clone.fields = 'a' as unknown as number[];
 
         try {
           new CreateMapDto(clone);

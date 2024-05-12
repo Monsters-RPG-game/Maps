@@ -15,7 +15,7 @@ export default class GetCharacterLocationDto implements IGetCharacterLocationDto
 
   private validate(): void {
     if (this.character) new Validation(this.character, 'character').isDefined().isObjectId();
-    if (this.id) new Validation(this.character, 'character').isDefined().isObjectId();
+    if (this.id) new Validation(this.id, 'id').isDefined().isObjectId();
 
     if (this.id === undefined && this.character === undefined) throw new NoDataProvided();
   }

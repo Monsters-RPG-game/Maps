@@ -18,8 +18,12 @@ export default class CreateCharacterLocationDto implements ICreateCharacterLocat
 
   private validate(): void {
     new Validation(this.character, 'character').isDefined().isObjectId();
-    new Validation(this.x, 'x').isDefined().isNumber();
-    new Validation(this.y, 'y').isDefined().isNumber();
-    new Validation(this.map, 'map').isDefined().isObjectId();
+
+    if (this.map) {
+      new Validation(this.x, 'x').isDefined().isNumber();
+      new Validation(this.y, 'y').isDefined().isNumber();
+    }
+
+    if (this.map) new Validation(this.map, 'map').isDefined().isObjectId();
   }
 }

@@ -2,7 +2,6 @@ import { afterAll, afterEach, beforeAll, describe, expect, it } from '@jest/glob
 import Rooster from '../../src/modules/maps/rooster';
 import * as utils from '../utils';
 import mongoose from 'mongoose';
-import { EFieldType } from '../../src/enums';
 import { IMapEntity } from '../../src/modules/maps/entity';
 
 describe('Map', () => {
@@ -63,19 +62,7 @@ describe('Map', () => {
           name: 'testMap',
           width: 20,
           height: 20,
-          fields: [
-            {
-              x: 0,
-              y: 0,
-              type: EFieldType.Field,
-              access: {
-                top: true,
-                left: true,
-                right: true,
-                bottom: true,
-              },
-            },
-          ],
+          fields: [1, 2, 3],
         });
       } catch (error) {
         err = error as Error;

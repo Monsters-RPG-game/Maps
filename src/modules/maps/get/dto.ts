@@ -13,7 +13,7 @@ export default class GetMapDto implements IGetMapDto {
   }
 
   private validate(): void {
-    if (!this.id) new Validation(this.id, 'id').isDefined().isObjectId();
-    if (!this.name) new Validation(this.name, 'name').isDefined().isString();
+    if (!this.id) new Validation(this.name, 'name').isDefined().isString();
+    if (!this.name) new Validation(this.id, 'id').isDefined().isObjectId();
   }
 }
