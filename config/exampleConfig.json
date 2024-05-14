@@ -1,5 +1,5 @@
 {
   "amqpURI": "rabbitUrl",
   "redisURI": "redisUrl",
-  "mongoURI": "mongodb://user:password@localhost:27017/Users"
+  "mongoURI": "mongodb://user:password@localhost:27017/Maps"
 }

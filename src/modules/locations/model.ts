@@ -22,7 +22,7 @@ export const characterLocationSchema = new mongoose.Schema({
 });
 
 const CharacterLocation = mongoose.model<ICharacterLocation>(
-  'CharacterLocation',
+  'characterLocation',
   characterLocationSchema,
   enums.EDbCollections.CharacterLocation,
 );

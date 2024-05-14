@@ -21,5 +21,5 @@ export const mapSchema = new mongoose.Schema({
   },
 });
 
-const Map = mongoose.model<IMap>('Map', mapSchema, enums.EDbCollections.Map);
+const Map = mongoose.model<IMap>('map', mapSchema, enums.EDbCollections.Map);
 export default Map;
