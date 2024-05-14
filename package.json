@@ -20,7 +20,9 @@
     "test:watch": "jest --watch --config __tests__/jest.config.ts",
     "test:e2e": "jest --runInBand --config __tests__/jest.config.e2e.ts",
     "test:unit": "jest --config __tests__/jest.config.unit.ts",
-    "test:db": "jest --config __tests__/jest.config.db.ts"
+    "test:db": "jest --config __tests__/jest.config.db.ts",
+    "migrate": "node src/migrations/index.js",
+    "migrate:dev": "cross-env NODE_ENV=dev node build/src/migrations/index.js"
   },
   "lint-staged": {
     "*.ts": [
