@@ -34,12 +34,19 @@ export default class MapHandler extends HandlerFactory<EModules.CharacterLocatio
   }
 
   async change(payload: unknown, user: ILocalUser): Promise<void> {
-    const data = await this.changeController.change(payload as IChangeCharacterLocationDto, user);
-    return State.broker.send(user.tempId, data, enums.EMessageTypes.Send);
+    await this.changeController.change(payload as IChangeCharacterLocationDto, user);
+    const attack = this.canBeAttacked();
+    return State.broker.send(user.tempId, { attack }, enums.EMessageTypes.Send);
   }
 
   async get(payload: unknown, user: ILocalUser): Promise<void> {
     const data = await this.getController.get(payload as IGetCharacterLocationDto);
     return State.broker.send(user.tempId, data, enums.EMessageTypes.Send);
+  }
+
+  private canBeAttacked(): boolean {
+    // This is placeholder. Chance of getting attacked will be moved to map data and will be dependent of map
+    const chance = Math.round(Math.random() * 100);
+    return chance < 20;
   }
 }
