@@ -47,12 +47,11 @@ export default class Controller extends ControllerFactory<EModules.CharacterLoca
     if (!splitted[target.y] || (target.y > current.y ? target.y - current.y > 1 : current.y - target.y > 1)) {
       throw new IncorrectLocationTarget();
     }
-    if (
-      target.x > map.width ||
-      target.x < map.width ||
-      (target.x > current.x ? target.x - current.x > 1 : current.x - target.x > 1)
-    ) {
+
+    if (target.x > map.width || (target.x > current.x ? target.x - current.x > 1 : current.x - target.x > 1)) {
       throw new IncorrectLocationTarget();
     }
+
+    if (target.x === current.x && target.y === current.y) throw new IncorrectLocationTarget();
   }
 }
