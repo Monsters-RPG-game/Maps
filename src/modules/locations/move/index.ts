@@ -44,14 +44,27 @@ export default class Controller extends ControllerFactory<EModules.CharacterLoca
       splitted.push(map.fields.slice(i, i + map.width));
     }
 
-    if (!splitted[target.y] || (target.y > current.y ? target.y - current.y > 1 : current.y - target.y > 1)) {
+    if (
+      !splitted[target.y] ||
+      (target.y > current.y ? target.y - current.y > 1 : current.y - target.y > 1) ||
+      target.y < 0
+    ) {
       throw new IncorrectLocationTarget();
     }
 
-    if (target.x > map.width || (target.x > current.x ? target.x - current.x > 1 : current.x - target.x > 1)) {
+    if (
+      target.x > map.width ||
+      (target.x > current.x ? target.x - current.x > 1 : current.x - target.x > 1) ||
+      target.x < 0
+    ) {
       throw new IncorrectLocationTarget();
     }
 
     if (target.x === current.x && target.y === current.y) throw new IncorrectLocationTarget();
   }
 }
+
+// Mapa ma 10 szerokości
+// 10 długości
+// Gracz jest na 1:1
+// Nie powinnien iść poza 0:0 w dół
