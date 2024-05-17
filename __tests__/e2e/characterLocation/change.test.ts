@@ -1,12 +1,12 @@
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from '@jest/globals';
+import { afterAll, afterEach, beforeAll, describe, expect, it } from '@jest/globals';
 import * as utils from '../../utils';
 import * as errors from '../../../src/errors';
 import Controller from '../../../src/modules/locations/move';
 import { ICharacterLocationEntity } from '../../../src/modules/locations/entity';
-import { IChangeCharacterLocationDto } from '../../../src/modules/locations/move/types';
 import type { IFullError, ILocalUser } from '../../../src/types';
 import { EUserTypes } from '../../../src/enums';
-import { IMapEntity } from 'modules/maps/entity';
+import { IMapEntity } from '../../../src/modules/maps/entity';
+import { IChangeCharacterLocationDto } from '../../../src/modules/locations/move/types';
 
 describe('Change character location', () => {
   const db = new utils.FakeFactory();
@@ -25,16 +25,6 @@ describe('Change character location', () => {
     type: EUserTypes.User,
   };
 
-  beforeEach(async () => {
-    await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
-    await db.characterLocation
-      .character(fakeCharacterLocation.character)
-      .x(fakeCharacterLocation.x)
-      .y(fakeCharacterLocation.y)
-      .map(fakeCharacterLocation.map)
-      .create();
-  })
-
   beforeAll(async () => {
     await connection.connect();
   });
@@ -49,7 +39,15 @@ describe('Change character location', () => {
 
   describe('Should throw', () => {
     describe('No data passed', () => {
-      it('Missing x', () => {
+      it('Missing x', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
         const clone = structuredClone(changeLocation);
         clone.x = undefined!;
         controller.change(clone, user).catch((err) => {
@@ -57,7 +55,15 @@ describe('Change character location', () => {
         });
       });
 
-      it('Missing y', () => {
+      it('Missing y', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
         const clone = structuredClone(changeLocation);
         clone.y = undefined!;
         controller.change(clone, user).catch((err) => {
@@ -71,19 +77,43 @@ describe('Change character location', () => {
         await db.cleanUp();
       });
 
-      it('X incorrect', () => {
+      it('X incorrect', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
         controller.change({ ...changeLocation, x: 'a' as unknown as number }, user).catch((err) => {
           expect(err).toEqual(new errors.IncorrectArgTypeError('x should be number'));
         });
       });
 
-      it('Y incorrect', () => {
+      it('Y incorrect', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
         controller.change({ ...changeLocation, y: 'a' as unknown as number }, user).catch((err) => {
           expect(err).toEqual(new errors.IncorrectArgTypeError('y should be number'));
         });
       });
 
-      it('Map incorrect', () => {
+      it('Map incorrect', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
         controller.change({ ...changeLocation, map: 'as' }, user).catch((err) => {
           expect(err).toEqual(new errors.IncorrectArgTypeError('map should be objectId'));
         });
@@ -91,6 +121,14 @@ describe('Change character location', () => {
 
       it('Cannot move to selected field. Field is too far', async () => {
         let error: IFullError | undefined = undefined
+
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
 
         try {
           await controller.change({ ...changeLocation, x: 8 }, user)
@@ -104,8 +142,56 @@ describe('Change character location', () => {
       it('Cannot move to selected field. Field does not exist', async () => {
         let error: IFullError | undefined = undefined
 
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
         try {
           await controller.change({ ...changeLocation, x: 20 }, user)
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.IncorrectLocationTarget())
+      });
+
+      it('Cannot move outside map scope', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(0)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
+
+        let error: IFullError | undefined = undefined
+
+        try {
+          await controller.change({ x: -1, y: fakeCharacterLocation.y }, user)
+        } catch (err) {
+          error = err as IFullError
+        }
+
+        expect(error).toEqual(new errors.IncorrectLocationTarget())
+      });
+
+      it('Cannot move outside map scope', async () => {
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(0)
+          .map(fakeCharacterLocation.map)
+          .create();
+
+        let error: IFullError | undefined = undefined
+
+        try {
+          await controller.change({ x: fakeCharacterLocation.x, y: -1 }, user)
         } catch (err) {
           error = err as IFullError
         }
@@ -117,6 +203,14 @@ describe('Change character location', () => {
     describe('Should pass', () => {
       it('Validated', async () => {
         let err: Error | undefined = undefined;
+
+        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.characterLocation
+          .character(fakeCharacterLocation.character)
+          .x(fakeCharacterLocation.x)
+          .y(fakeCharacterLocation.y)
+          .map(fakeCharacterLocation.map)
+          .create();
 
         try {
           await controller.change(changeLocation, user);
