@@ -1,20 +1,471 @@
 {
   "maps": [
     {
-      "_id": "6634b7d95b6121dc8766b471",
-      "name": "testMap",
-      "height": 5,
-      "width": 5,
-      "fields": [1,1,2,2,1,1,1,1,1,1,2,1,2,1,1,1,1,2,2,2,2,1,1,2,1,2,1,2,1,2,1,2,1,2,1,1,1,1,1]
-    }
-  ],
+    "_id": "66577aa4871717019de083e2",
+    "name": "fakeMap",
+    "layers": [
+        {
+            "data": [
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                126,
+                625,
+                626,
+                0
+            ],
+            "height": 40,
+            "id": 3,
+            "name": "Below Player",
+            "opacity": 1,
+            "type": "tilelayer",
+            "visible": true,
+            "width": 40,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "draworder": "topdown",
+            "id": 4,
+            "name": "Objects",
+            "objects": [
+                {
+                    "height": 0,
+                    "id": 275,
+                    "name": "Spawn Point",
+                    "point": true,
+                    "rotation": 0,
+                    "type": "",
+                    "visible": true,
+                    "width": 0,
+                    "x": 1,
+                    "y": 0
+                }
+            ],
+            "opacity": 1,
+            "type": "objectgroup",
+            "visible": false,
+            "x": 0,
+            "y": 0
+        }
+    ],
+    "nextlayerid": 5,
+    "nextobjectid": 277,
+    "orientation": "orthogonal",
+    "properties": [
+        {
+            "name": "edges",
+            "type": "string",
+            "value": "clamped"
+        }
+    ],
+    "type": "map",
+    "version": 1.2,
+    "tiledversion": "1.2.3",
+    "tilesets": [
+        {
+            "columns": 2,
+            "firstgid": 1,
+            "grid": {
+                "height": 16,
+                "orientation": "orthogonal",
+                "width": 16
+            },
+            "image": "../tileset_32px.png",
+            "imageheight": 1020,
+            "imagewidth": 816,
+            "margin": 1,
+            "name": "tiles",
+            "spacing": 2,
+            "terrains": [
+                {
+                    "name": "Path",
+                    "tile": 173
+                },
+                {
+                    "name": "Grass",
+                    "tile": 125
+                }
+            ],
+            "tilecount": 33,
+            "tileheight": 32,
+            "tiles": [
+                {
+                    "id": 0,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 14,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 15,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 16,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 17,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 18,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 19,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 20,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 21,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 22,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 23,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 24,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 25,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 26,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 27,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 28,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 30,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 31,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": 32,
+                    "properties": [
+                        {
+                            "name": "collides",
+                            "type": "bool",
+                            "value": true
+                        }
+                    ]
+                }
+            ],
+            "tilewidth": 32
+        }
+    ],
+    "tileheight": 32,
+    "width": 40,
+    "height": 40,
+    "tilewidth": 32,
+    "infinite": false,
+    "renderorder": "right-down"
+      }
+    ],
   "locations": [
     {
       "_id": "66353b9f6e7c8e878c22b013",
       "character": "66353b9f6e7c8e878c22b012",
-      "x": 5,
-      "y": 7,
-      "map": "6634b7d95b6121dc8766b471"
+      "x": 2,
+      "y": 0,
+      "map": "66577aa4871717019de083e2"
     }
   ]
 }

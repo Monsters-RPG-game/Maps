@@ -30,7 +30,24 @@ describe('Map', () => {
     });
 
     it('Incorrect target', async () => {
-      await db.maps.name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+      await db.maps
+        .name(fakeMap.name)
+        .width(fakeMap.width)
+        .height(fakeMap.height)
+        .infinite(fakeMap.infinite)
+        .type(fakeMap.type)
+        .tilesets(fakeMap.tilesets)
+        .tileheight(fakeMap.tileheight)
+        .tiledversion(fakeMap.tiledversion)
+        .version(fakeMap.version)
+        .renderorder(fakeMap.renderorder)
+        .properties(fakeMap.properties)
+        .orientation(fakeMap.orientation)
+        .nextobjectid(fakeMap.nextobjectid)
+        .nextlayerid(fakeMap.nextlayerid)
+        .layers(fakeMap.layers)
+        .tilewidth(fakeMap.tilewidth)
+        .create();
 
       const rooster = new Rooster();
       const map = await rooster.getByName('a');
@@ -41,16 +58,32 @@ describe('Map', () => {
 
   describe('Should pass', () => {
     it('Get', async () => {
-      await db.maps.name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+      await db.maps
+        .name(fakeMap.name)
+        .width(fakeMap.width)
+        .height(fakeMap.height)
+        .infinite(fakeMap.infinite)
+        .type(fakeMap.type)
+        .tilesets(fakeMap.tilesets)
+        .tileheight(fakeMap.tileheight)
+        .tiledversion(fakeMap.tiledversion)
+        .version(fakeMap.version)
+        .renderorder(fakeMap.renderorder)
+        .properties(fakeMap.properties)
+        .orientation(fakeMap.orientation)
+        .nextobjectid(fakeMap.nextobjectid)
+        .nextlayerid(fakeMap.nextlayerid)
+        .layers(fakeMap.layers)
+        .tilewidth(fakeMap.tilewidth)
+        .create();
 
       const rooster = new Rooster();
-      const map = await rooster.getByName('testMap');
-      const { name, height, width, fields } = map!;
+      const map = await rooster.getByName('fakeMap');
+      const { name, height, width } = map!;
 
       expect(name).toEqual(fakeMap.name);
       expect(height).toEqual(fakeMap.height);
       expect(width).toEqual(fakeMap.width);
-      expect(fields).toEqual(fakeMap.fields);
     });
 
     it('Add', async () => {
@@ -58,12 +91,7 @@ describe('Map', () => {
       const rooster = new Rooster();
 
       try {
-        await rooster.add({
-          name: 'testMap',
-          width: 20,
-          height: 20,
-          fields: [1, 2, 3],
-        });
+        await rooster.add(fakeMap);
       } catch (error) {
         err = error as Error;
       }
