@@ -10,12 +10,7 @@ describe('Create map', () => {
   const controller = new Controller();
   const connection = new utils.Connection();
   const fakeMap = utils.fakeData.maps[0] as IMapEntity;
-  const createMap: ICreateMapDto = {
-    name: 'testMap',
-    height: 10,
-    width: 10,
-    fields: [1, 2, 3],
-  };
+  const createMap: ICreateMapDto = fakeMap;
 
   beforeAll(async () => {
     await connection.connect();
@@ -54,19 +49,28 @@ describe('Create map', () => {
           expect(err).toEqual(new errors.MissingArgError('width'));
         });
       });
-
-      it('Missing fields', () => {
-        const clone = structuredClone(createMap);
-        clone.fields = undefined!;
-        controller.create(clone).catch((err) => {
-          expect(err).toEqual(new errors.MissingArgError('fields'));
-        });
-      });
     });
 
     describe('Incorrect data', () => {
       beforeEach(async () => {
-        await db.maps.name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
       });
 
       afterEach(async () => {
@@ -90,13 +94,6 @@ describe('Create map', () => {
           expect(err).toEqual(new errors.IncorrectArgTypeError('width should be number'));
         });
       });
-
-      it('Fields incorrect', () => {
-        controller.create({ ...createMap, fields: 'a' as unknown as number[] }).catch((err) => {
-          expect(err).toEqual(new errors.IncorrectArgTypeError('fields should be array'));
-        });
-      });
-
     });
   });
 

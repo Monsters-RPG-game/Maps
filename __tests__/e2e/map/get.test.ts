@@ -48,7 +48,24 @@ describe('Get map', () => {
 
     describe('Incorrect data', () => {
       beforeEach(async () => {
-        await db.maps.name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
       });
 
       afterEach(async () => {
@@ -71,7 +88,24 @@ describe('Get map', () => {
 
   describe('Should pass', () => {
     it('Validated', async () => {
-      await db.maps.name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+      await db.maps
+        .name(fakeMap.name)
+        .width(fakeMap.width)
+        .height(fakeMap.height)
+        .infinite(fakeMap.infinite)
+        .type(fakeMap.type)
+        .tilesets(fakeMap.tilesets)
+        .tileheight(fakeMap.tileheight)
+        .tiledversion(fakeMap.tiledversion)
+        .version(fakeMap.version)
+        .renderorder(fakeMap.renderorder)
+        .properties(fakeMap.properties)
+        .orientation(fakeMap.orientation)
+        .nextobjectid(fakeMap.nextobjectid)
+        .nextlayerid(fakeMap.nextlayerid)
+        .layers(fakeMap.layers)
+        .tilewidth(fakeMap.tilewidth)
+        .create();
 
       const map = await controller.get(getMap);
 

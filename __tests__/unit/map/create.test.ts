@@ -2,14 +2,12 @@ import { describe, expect, it } from '@jest/globals';
 import * as errors from '../../../src/errors';
 import { ICreateMapDto } from '../../../src/modules/maps/create/types';
 import CreateMapDto from '../../../src/modules/maps/create/dto';
+import * as utils from '../../utils';
+import { IMapEntity } from 'modules/maps/entity';
 
 describe('Map', () => {
-  const createMap: ICreateMapDto = {
-    name: 'testMap',
-    height: 100,
-    width: 100,
-    fields: [1, 2, 3],
-  };
+  const fakeMap = utils.fakeData.maps[0] as IMapEntity;
+  const createMap: ICreateMapDto = fakeMap;
 
   describe('Should throw', () => {
     describe('No data passed', () => {
@@ -58,17 +56,6 @@ describe('Map', () => {
           new CreateMapDto(clone);
         } catch (err) {
           expect(err).toEqual(new errors.IncorrectArgTypeError('width should be number'));
-        }
-      });
-
-      it('Fields incorrect', () => {
-        const clone = structuredClone(createMap);
-        clone.fields = 'a' as unknown as number[];
-
-        try {
-          new CreateMapDto(clone);
-        } catch (err) {
-          expect(err).toEqual(new errors.IncorrectArgTypeError('fields should be array'));
         }
       });
     });

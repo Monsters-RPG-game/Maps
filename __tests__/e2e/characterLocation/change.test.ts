@@ -3,7 +3,7 @@ import * as utils from '../../utils';
 import * as errors from '../../../src/errors';
 import Controller from '../../../src/modules/locations/move';
 import { ICharacterLocationEntity } from '../../../src/modules/locations/entity';
-import type { IFullError, ILocalUser } from '../../../src/types';
+import type { ILocalUser, IFullError } from '../../../src/types';
 import { EUserTypes } from '../../../src/enums';
 import { IMapEntity } from '../../../src/modules/maps/entity';
 import { IChangeCharacterLocationDto } from '../../../src/modules/locations/move/types';
@@ -15,8 +15,8 @@ describe('Change character location', () => {
   const fakeCharacterLocation = utils.fakeData.locations[0] as ICharacterLocationEntity;
   const fakeMap = utils.fakeData.maps[0] as IMapEntity;
   const changeLocation: IChangeCharacterLocationDto = {
-    x: 5,
-    y: 6,
+    x: 1,
+    y: 0,
   };
   const user: ILocalUser = {
     userId: fakeCharacterLocation.character,
@@ -40,7 +40,24 @@ describe('Change character location', () => {
   describe('Should throw', () => {
     describe('No data passed', () => {
       it('Missing x', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -56,7 +73,24 @@ describe('Change character location', () => {
       });
 
       it('Missing y', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -78,7 +112,24 @@ describe('Change character location', () => {
       });
 
       it('X incorrect', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -92,7 +143,24 @@ describe('Change character location', () => {
       });
 
       it('Y incorrect', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -106,7 +174,24 @@ describe('Change character location', () => {
       });
 
       it('Map incorrect', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -121,8 +206,25 @@ describe('Change character location', () => {
 
       it('Cannot move to selected field. Field is too far', async () => {
         let error: IFullError | undefined = undefined
-
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          ._id(fakeMap._id)
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -133,6 +235,7 @@ describe('Change character location', () => {
         try {
           await controller.change({ ...changeLocation, x: 8 }, user)
         } catch (err) {
+          console.log(err)
           error = err as IFullError
         }
 
@@ -141,8 +244,25 @@ describe('Change character location', () => {
 
       it('Cannot move to selected field. Field does not exist', async () => {
         let error: IFullError | undefined = undefined
-
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          ._id(fakeMap._id)
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -160,7 +280,25 @@ describe('Change character location', () => {
       });
 
       it('Cannot move outside map scope', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          ._id(fakeMap._id)
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(0)
@@ -180,7 +318,25 @@ describe('Change character location', () => {
       });
 
       it('Cannot move outside map scope', async () => {
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          ._id(fakeMap._id)
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)
@@ -203,8 +359,25 @@ describe('Change character location', () => {
     describe('Should pass', () => {
       it('Validated', async () => {
         let err: Error | undefined = undefined;
-
-        await db.maps._id(fakeMap._id).name(fakeMap.name).width(fakeMap.width).height(fakeMap.height).fields(fakeMap.fields).create();
+        await db.maps
+          ._id(fakeMap._id)
+          .name(fakeMap.name)
+          .width(fakeMap.width)
+          .height(fakeMap.height)
+          .infinite(fakeMap.infinite)
+          .type(fakeMap.type)
+          .tilesets(fakeMap.tilesets)
+          .tileheight(fakeMap.tileheight)
+          .tiledversion(fakeMap.tiledversion)
+          .version(fakeMap.version)
+          .renderorder(fakeMap.renderorder)
+          .properties(fakeMap.properties)
+          .orientation(fakeMap.orientation)
+          .nextobjectid(fakeMap.nextobjectid)
+          .nextlayerid(fakeMap.nextlayerid)
+          .layers(fakeMap.layers)
+          .tilewidth(fakeMap.tilewidth)
+          .create();
         await db.characterLocation
           .character(fakeCharacterLocation.character)
           .x(fakeCharacterLocation.x)

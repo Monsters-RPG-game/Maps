@@ -1,12 +1,14 @@
 import ChangeCharacterLocationDto from './dto';
-import { IncorrectLocationTarget } from '../../../errors';
+import { IncorrectLocationTarget, NoDefaultMap } from '../../../errors';
 import ControllerFactory from '../../../tools/abstract/controller';
+import Log from '../../../tools/logger';
 import MapsController from '../../maps/get';
 import Rooster from '../rooster';
 import type { IChangeCharacterLocationDto } from './types';
 import type { EModules } from '../../../enums';
 import type { ILocalUser } from '../../../types';
 import type { IMapEntity } from '../../maps/entity';
+import type { IMapLayer } from '../../maps/types';
 import type { ICharacterLocationEntity } from '../entity';
 
 export default class Controller extends ControllerFactory<EModules.CharacterLocation> {
@@ -24,7 +26,15 @@ export default class Controller extends ControllerFactory<EModules.CharacterLoca
   async change(data: IChangeCharacterLocationDto, user: ILocalUser): Promise<void> {
     const payload = new ChangeCharacterLocationDto(data);
 
-    const currentLocation = (await this.rooster.getByCharacter(user.userId)) as ICharacterLocationEntity;
+    let currentLocation = (await this.rooster.getByCharacter(user.userId)) as ICharacterLocationEntity;
+    if (!currentLocation) {
+      Log.error('User location', `User ${user.userId} has no location in database. Creating basic location`);
+
+      const defaultMap = await this.mapsController.get({ name: 'main' });
+      if (!defaultMap) throw new NoDefaultMap();
+      await this.rooster.addDefault(user.userId, defaultMap._id);
+      currentLocation = (await this.rooster.getByCharacter(user.userId)) as ICharacterLocationEntity;
+    }
 
     const currentMap = (await this.mapsController.get({ id: currentLocation.map.toString() })) as IMapEntity;
     this.shouldMove(payload, currentLocation, currentMap);
@@ -40,8 +50,11 @@ export default class Controller extends ControllerFactory<EModules.CharacterLoca
 
   private shouldMove(target: IChangeCharacterLocationDto, current: ICharacterLocationEntity, map: IMapEntity): void {
     const splitted: number[][] = [];
-    for (let i = 0; i < map.fields.length; i += map.width) {
-      splitted.push(map.fields.slice(i, i + map.width));
+    const targetLayer = map.layers.find((l) => l.name === 'Below Player') as IMapLayer | undefined;
+    if (!targetLayer) throw new Error('Broken map'); // #TODO Replce this with proper error;
+
+    for (let i = 0; i < targetLayer.data.length; i += map.width) {
+      splitted.push(targetLayer.data.slice(i, i + map.width));
     }
 
     if (
@@ -63,8 +76,3 @@ export default class Controller extends ControllerFactory<EModules.CharacterLoca
     if (target.x === current.x && target.y === current.y) throw new IncorrectLocationTarget();
   }
 }
-
-// Mapa ma 10 szerokości
-// 10 długości
-// Gracz jest na 1:1
-// Nie powinnien iść poza 0:0 w dół
