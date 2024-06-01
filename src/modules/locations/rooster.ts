@@ -23,7 +23,7 @@ export default class Rooster extends RoosterFactory<
 
   async addDefault(character: string, map: string): Promise<string> {
     // #TODO Move this hardcodded data to config, which will be easy to manipulate. Because this project does not have any maps, this is used as placeholder
-    const newElement = new this.model({ character, map, x: 0, y: 0 });
+    const newElement = new this.model({ character, map, x: 11, y: 38 }); // This data is hardcodded to comply with current map. It will be fetched from database later
     const callback = await newElement.save();
     return callback._id.toString();
   }
