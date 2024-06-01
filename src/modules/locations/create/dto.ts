@@ -9,8 +9,8 @@ export default class CreateCharacterLocationDto implements ICreateCharacterLocat
 
   constructor(data: ICreateCharacterLocationDto) {
     this.character = data.character;
-    this.x = data.x;
-    this.y = data.y;
+    this.x = data.x ?? 11; // hardcodded base location for user who just created account
+    this.y = data.y ?? 38; // hardcodded base location for user who just created account
     this.map = data.map;
 
     this.validate();
