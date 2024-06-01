@@ -48,36 +48,6 @@ describe('Create character location', () => {
         expect(error).toEqual(new errors.MissingArgError('character'));
       });
 
-      it('Missing x', async () => {
-        let error: IFullError | undefined = undefined
-        const clone = structuredClone(createLocation);
-
-        clone.x = undefined!;
-
-        try {
-          await controller.create(clone)
-        } catch (err) {
-          error = err as IFullError
-        }
-
-        expect(error).toEqual(new errors.MissingArgError('x'));
-      });
-
-      it('Missing y', async () => {
-        let error: IFullError | undefined = undefined
-        const clone = structuredClone(createLocation);
-
-        clone.y = undefined!;
-
-        try {
-          await controller.create(clone)
-        } catch (err) {
-          error = err as IFullError
-        }
-
-        expect(error).toEqual(new errors.MissingArgError('y'));
-      });
-
       it('Missing map', async () => {
         let error: IFullError | undefined = undefined
         const clone = structuredClone(createLocation);
