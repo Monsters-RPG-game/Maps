@@ -1,7 +1,6 @@
 import chalk from 'chalk';
 import errLogger from './logger';
-import * as enums from '../../enums';
-import type { ELogTypes } from '../../enums';
+import * as enums from '../../enums/index';
 
 /**
  * Log passed data and save it in local files
@@ -9,7 +8,7 @@ import type { ELogTypes } from '../../enums';
 export default class Log {
   static error(target: string, ...messages: unknown[]): void {
     messages.forEach((m) => {
-      Log.buildLog(() => chalk.red(`Log.ERROR: ${target}`), enums.ELogTypes.Warn, m);
+      Log.buildLog(() => chalk.red(`Log.ERROR: ${target}`), enums.ELogTypes.Error, m);
     });
   }
 
@@ -38,13 +37,13 @@ export default class Log {
     });
   }
 
-  private static buildLog(color: () => string, type: ELogTypes, message: unknown): void {
+  private static buildLog(color: () => string, type: enums.ELogTypes, message: unknown): void {
     console.info(`[${chalk.gray(Log.getDate())}] ${color()} ${Log.toString(message)}`);
     Log.saveLog(message, type);
   }
 
   private static saveLog(message: unknown, type: enums.ELogTypes): void {
-    const mess = typeof message !== 'string' ? JSON.stringify(message) : message;
+    const mess = typeof message !== 'string' ? JSON.stringify(message, null, 2) : message;
 
     switch (type) {
       case enums.ELogTypes.Warn:
@@ -68,6 +67,6 @@ export default class Log {
   }
 
   private static toString(message: unknown): string {
-    return typeof message !== 'string' ? JSON.stringify(message) : message;
+    return typeof message !== 'string' ? JSON.stringify(message, null, 2) : message;
   }
 }
