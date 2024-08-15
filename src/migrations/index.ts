@@ -8,11 +8,10 @@ import type { Connection } from 'mongoose';
 export default class Migrations {
   private readonly _client: MongoConnection;
 
+  private _migrationClient: Connection | undefined;
   constructor() {
     this._client = new MongoConnection();
   }
-
-  private _migrationClient: Connection | undefined;
 
   private get migrationClient(): Connection | undefined {
     return this._migrationClient;
@@ -26,6 +25,12 @@ export default class Migrations {
     return this._client;
   }
 
+  private async getLastMigration(): Promise<string[]> {
+    const Model = getModel(this.migrationClient as Connection);
+    const entry = await Model.find({ dbName: 'Maps' });
+
+    return !entry || entry.length === 0 ? [] : (entry[0] as IMigration).changes;
+  }
   async init(): Promise<void> {
     this.migrationClient = await this.client.init();
 
@@ -68,7 +73,7 @@ export default class Migrations {
         }),
       );
       await this.saveChanges(succeeded);
-    } catch (err) {
+    } catch (_err) {
       Log.error('Migrations', `Could not migrate ${migrationName}`);
       if (down) {
         Log.log('Migration', 'Migrating down');
@@ -83,13 +88,6 @@ export default class Migrations {
     const Model = getModel(this.migrationClient as Connection);
     const newElement = new Model({ changes, dbName: 'Maps' });
     await newElement.save();
-  }
-
-  private async getLastMigration(): Promise<string[]> {
-    const Model = getModel(this.migrationClient as Connection);
-    const entry = await Model.find({ dbName: 'Maps' });
-
-    return !entry || entry.length === 0 ? [] : (entry[0] as IMigration).changes;
   }
 }
 
