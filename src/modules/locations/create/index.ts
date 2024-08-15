@@ -7,12 +7,11 @@ import type { ICreateCharacterLocationDto } from './types';
 import type { EModules } from '../../../enums';
 
 export default class Controller extends ControllerFactory<EModules.CharacterLocation> {
+  private _mapController: MapController;
   constructor() {
     super(new Rooster());
     this._mapController = new MapController();
   }
-
-  private _mapController: MapController;
 
   private get mapController(): MapController {
     return this._mapController;
