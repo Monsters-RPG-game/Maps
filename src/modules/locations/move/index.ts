@@ -12,12 +12,11 @@ import type { IMapLayer } from '../../maps/types';
 import type { ICharacterLocationEntity } from '../entity';
 
 export default class Controller extends ControllerFactory<EModules.CharacterLocation> {
+  private _mapsController: MapsController;
   constructor() {
     super(new Rooster());
     this._mapsController = new MapsController();
   }
-
-  private _mapsController: MapsController;
 
   private get mapsController(): MapsController {
     return this._mapsController;
