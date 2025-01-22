@@ -1,29 +1,70 @@
 {
   "name": "maps",
-  "version": "0.2.0",
-  "description": "Maps",
+  "version": "0.1.0",
+  "description": "Part of microservice application, which manages maps requests",
   "productName": "Maps",
   "author": "https://github.com/Virus288",
   "license": "Apache-2.0",
   "private": false,
+  "type": "module",
+  "main": "build/main.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/main.js",
-    "start:dev": "concurrently 'npm run build:watch' 'cross-env NODE_ENV=dev nodemon build/src/main.js'",
-    "start:testDev": "cross-env NODE_ENV=testDev node src/main.js",
-    "start:test": "cross-env NODE_ENV=test TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true tsx src/main.ts",
-    "build": "tsc -p tsconfig.release.json",
-    "build:watch": "tsc -w -p tsconfig.release.json",
+    "start": "node build/src/main.js",
+    "start:dev": "concurrently 'npm run build:watch' 'cross-env NODE_ENV=development nodemon build/src/main.js'",
+    "start:testDev": "cross-env NODE_ENV=testDev nodemon build/src/main.js",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
     "lint": "cross-env NODE_ENV=development eslint -c eslint.config.mjs . --fix",
     "listErrors": "node_modules/.bin/tsc --skipLibCheck",
     "lintStaged": "npx lint-staged",
     "test": "echo 'If you want to run all the tests, please use makefile'",
-    "test:watch": "jest --watch --config __tests__/jest.config.ts",
-    "test:e2e": "jest --runInBand --config __tests__/jest.config.e2e.ts",
-    "test:unit": "jest --config __tests__/jest.config.unit.ts",
-    "test:db": "jest --config __tests__/jest.config.db.ts",
-    "migrate": "node src/migrations/index.js",
-    "migrate:dev": "cross-env NODE_ENV=dev node build/src/migrations/index.js"
+    "test:e2e": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand --config __tests__/jest.config.e2e.ts",
+    "test:unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --config __tests__/jest.config.unit.ts",
+    "test:db": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runInBand --config __tests__/jest.config.db.ts"
   },
+  "dependencies": {
+    "amqplib": "0.10.5",
+    "mongoose": "8.9.2",
+    "simpl-loggar": "^0.5.3"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.2.2",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.9.0",
+    "@jest/globals": "29.7.0",
+    "@types/amqplib": "0.10.6",
+    "@types/node": "22.10.2",
+    "@types/semver": "^7.5.8",
+    "@typescript-eslint/eslint-plugin": "8.18.2",
+    "@typescript-eslint/parser": "8.18.2",
+    "concurrently": "^9.0.1",
+    "cross-env": "7.0.3",
+    "eslint": "9.17.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-check-file": "2.8.0",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-jest": "28.10.0",
+    "eslint-plugin-jsdoc": "^50.0.0",
+    "eslint-plugin-prettier": "5.2.1",
+    "eslint-plugin-sort-class-members": "1.21.0",
+    "jest": "29.7.0",
+    "jest-environment-node": "^29.7.0",
+    "mongodb-memory-server": "^10.1.2",
+    "nodemon": "^3.1.7",
+    "prettier": "3.4.2",
+    "supertest": "^7.0.0",
+    "ts-jest": "29.2.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "5.7.2"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "node.js",
+    "maps",
+    "monsters"
+  ],
   "lint-staged": {
     "*.ts": [
       "cross-env NODE_ENV=development eslint --cache"
@@ -32,51 +73,7 @@
       "prettier --ignore-path .eslintignore --parser json --write"
     ]
   },
-  "dependencies": {
-    "amqplib": "0.10.4",
-    "chalk": "4.1.2",
-    "mongoose": "8.5.2",
-    "node": "22.5.1",
-    "winston": "^3.8.2",
-    "winston-daily-rotate-file": "^5.0.0"
-  },
-  "devDependencies": {
-    "@eslint/compat": "^1.1.1",
-    "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.9.0",
-    "@jest/globals": "^29.3.1",
-    "@types/amqplib": "^0.10.0",
-    "@types/node": "^20.10.3",
-    "@typescript-eslint/eslint-plugin": "8.0.1",
-    "@typescript-eslint/parser": "8.0.1",
-    "concurrently": "^8.2.2",
-    "cross-env": "^7.0.3",
-    "eslint": "9.9.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-check-file": "2.8.0",
-    "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-jest": "28.8.0",
-    "eslint-plugin-jsdoc": "^50.0.0",
-    "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-sort-class-members": "1.20.0",
-    "jest": "^29.5.0",
-    "jest-config": "^29.5.0",
-    "mongodb-memory-server": "9.4.0",
-    "nodemon": "^3.0.1",
-    "prettier": "^3.1.0",
-    "ts-jest": "^29.0.3",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.7.2",
-    "typescript": "5.5.4"
-  },
-  "overrides": {
-    "eslint-plugin-import": {
-      "eslint": "^9"
-    }
-  },
-  "overrides": {
-    "eslint-plugin-import": {
-      "eslint": "^9"
-    }
+  "engines": {
+    "node": ">=19"
   }
 }
