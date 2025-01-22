@@ -36,7 +36,7 @@ export default [...fixupConfigRules(compat.extends(
     ...config,
     files: ["src/**/*.ts", "src/**/**.*.json"],
 })), {
-    files: ["src/**/*.ts", "ssrc/**/**.*.json"],
+    files: ["src/**/*.ts", "src/**/**.*.json"],
 
     plugins: {
         import: fixupPluginRules(_import),

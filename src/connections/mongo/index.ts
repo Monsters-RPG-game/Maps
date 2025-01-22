@@ -1,28 +1,33 @@
 import mongoose from 'mongoose';
-import getConfig from '../../tools/configLoader';
-import Log from '../../tools/logger';
+import Log from 'simpl-loggar';
+import getConfig from '../../tools/configLoader.js';
 import type { ConnectOptions } from 'mongoose';
 
 export default class Mongo {
   async init(): Promise<void> {
-    process.env.NODE_ENV === 'test' ? await this.startMockServer() : await this.startServer();
+    process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'testDev'
+      ? await this.startMockServer()
+      : await this.startServer();
   }
 
-  async disconnect(): Promise<void> {
-    await mongoose.disconnect();
-    await mongoose.connection.close();
+  disconnect(): void {
+    mongoose.disconnect().catch((err) => {
+      Log.error('Mongo', 'Cannot disconnect', (err as Error).message);
+    });
   }
 
   private async startMockServer(): Promise<void> {
-    const MockServer = await import('./mock');
+    const MockServer = await import('./mock.js');
     const mock = new MockServer.default();
     await mock.init();
   }
 
   private async startServer(): Promise<void> {
-    await mongoose.connect(getConfig().mongoURI, {
+    await mongoose.connect(getConfig().mongoURL, {
       dbName: 'Maps',
+      serverSelectionTimeoutMS: 5000,
     } as ConnectOptions);
+
     Log.log('Mongo', 'Started server');
   }
 }
